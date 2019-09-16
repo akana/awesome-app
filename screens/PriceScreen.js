@@ -13,6 +13,9 @@ export default class PriceScreen extends Component{
       image : '',
       name : "",
       prices : []
+    },
+    test : {
+      imageLoad : false
     }
   }
   
@@ -21,8 +24,9 @@ export default class PriceScreen extends Component{
       <View data-test="component-price">
         <View style={styles.vegImgContainer}>
           <Image
+            data-test="component-veg-im"
             source={
-                require(this.state.item.image)
+                require("../assets/images/onion.jpg")
             }
             style={styles.vegImage}
           />
@@ -32,6 +36,25 @@ export default class PriceScreen extends Component{
             <Text data-test="component-veg-name">Unknown name</Text>
           )
 
+          }
+        </View>
+        <View>
+          { this.state.item.prices.length > 0 ? 
+              this.state.item.prices.map((price, i) => (
+                <View data-test="component-veg-item" key={i}>
+                  <View data-test="component-veg-item-month">
+                    {price.month}
+                  </View>
+                  <View data-test="component-veg-item-price">
+                    {price.price}
+                  </View>
+                </View>
+              ))
+            : (
+              <View data-test="component-veg-item-not-available">
+                Price is not available
+              </View>
+            )
           }
         </View>
       </View>

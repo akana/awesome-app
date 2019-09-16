@@ -6,8 +6,8 @@ import PriceScreen from '../screens/PriceScreen';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const setup = (state={})=>{
-  let wrapper =  shallow(<PriceScreen />);
+const setup = (state={}, props={})=>{
+  let wrapper =  shallow(<PriceScreen {...props}/>);
   if(state)  wrapper.setState(state);
   return wrapper;
 }
@@ -33,14 +33,15 @@ test('renders no error', () => {
 });
 
 test('renders vegetable name', () => {
-  let wrapper = setup({
+  let state= {
     item : {
-      name : "onion",
+      ...onion,
       image : ''
     }
-  });
+  }
+  let wrapper = setup(state);
   let priceComp = wrapper.find('[data-test="component-veg-name"]');
-  expect(priceComp.dive().text()).toBe("onion");
+  expect(priceComp.dive().text()).toBe("Onion");
 });
 
 test('renders vegetable name not available', () => {
@@ -52,16 +53,35 @@ test('renders vegetable name not available', () => {
 });
 
 test('renders vegetable image', () => {
+  let wrapper = setup({
+    item : onion
+  });
 
-});
-
-test('renders vegetable image not available', () => {
-
+  let img = wrapper.find('[data-test="component-veg-img"]');
+  expect(img).toBeTruthy();
 });
 
 test('renders vegetable price list', () => {
+  let wrapper = setup({
+    item : onion
+  });
+  let priceList = wrapper.find('[data-test="component-veg-item"]');
+  expect(priceList).toHaveLength(1);
 
+  let month = priceList.children('[data-test="component-veg-item-month"]');
+  let price = priceList.children('[data-test="component-veg-item-price"]');
+
+  expect(month.dive().text()).toBe('Oct');
+  expect(price.dive().text()).toBe('10');
 });
 
 test('renders vegetable price not available', () => {
+  let wrapper = setup({
+    item : {
+      ...onion,
+      prices : []
+    }
+  });
+  let priceNotAvailable = wrapper.find('[data-test="component-veg-item-not-available"]');
+  expect(priceNotAvailable.dive().text()).toBe("Price is not available");
 });
