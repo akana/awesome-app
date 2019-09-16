@@ -8,14 +8,24 @@ import {
 import _ from 'lodash';
 
 export default class PriceScreen extends Component{
+  // state = {
+  //   item : {
+  //     image : '',
+  //     name : "",
+  //     prices : []
+  //   }
+  // }
   state = {
     item : {
-      image : '',
-      name : "",
-      prices : []
-    },
-    test : {
-      imageLoad : false
+      image : '../assets/images/onion.jpg',
+      name : "Onion",
+      prices : [
+        {
+          month : 'Oct',
+          price : 10,
+          Unit : "KG"
+        }
+      ]
     }
   }
   
@@ -41,19 +51,25 @@ export default class PriceScreen extends Component{
         <View>
           { this.state.item.prices.length > 0 ? 
               this.state.item.prices.map((price, i) => (
-                <View data-test="component-veg-item" key={i}>
-                  <View data-test="component-veg-item-month">
-                    {price.month}
+                <View data-test="component-veg-item" key={i}
+                  style={styles.vegItem}
+                >
+                  <View style={styles.vegMonth}>
+                    <Text data-test="component-veg-item-month">
+                      {price.month}
+                    </Text>
                   </View>
-                  <View data-test="component-veg-item-price">
-                    {price.price}
+                  <View style={styles.vegPrice}>
+                    <Text data-test="component-veg-item-price">
+                      {price.price} $
+                    </Text>
                   </View>
                 </View>
               ))
             : (
-              <View data-test="component-veg-item-not-available">
+              <Text data-test="component-veg-item-not-available">
                 Price is not available
-              </View>
+              </Text>
             )
           }
         </View>
@@ -77,5 +93,15 @@ const styles = StyleSheet.create({
     width: 100,
     height: 80,
     resizeMode: 'contain',
+  },
+  vegItem : {
+    flex : 1,
+    flexDirection : 'row'
+  },
+  vegPrice : {
+    width : 100
+  },
+  vegMonth : {
+    width : 100
   }
 });

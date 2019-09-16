@@ -67,12 +67,11 @@ test('renders vegetable price list', () => {
   });
   let priceList = wrapper.find('[data-test="component-veg-item"]');
   expect(priceList).toHaveLength(1);
-
-  let month = priceList.children('[data-test="component-veg-item-month"]');
-  let price = priceList.children('[data-test="component-veg-item-price"]');
+  let month = priceList.children().children('[data-test="component-veg-item-month"]');
+  let price = priceList.children().children('[data-test="component-veg-item-price"]');
 
   expect(month.dive().text()).toBe('Oct');
-  expect(price.dive().text()).toBe('10');
+  expect(price.dive().text()).toBe('10 $');
 });
 
 test('renders vegetable price not available', () => {
