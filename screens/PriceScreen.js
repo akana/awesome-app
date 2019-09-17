@@ -34,7 +34,7 @@ export default class PriceScreen extends Component{
       <View data-test="component-price">
         <View style={styles.vegImgContainer}>
           <Image
-            data-test="component-veg-im"
+            data-test="component-veg-img"
             source={
                 require("../assets/images/onion.jpg")
             }
@@ -44,9 +44,7 @@ export default class PriceScreen extends Component{
             <Text data-test="component-veg-name">{this.state.item.name}</Text>
           ) : (
             <Text data-test="component-veg-name">Unknown name</Text>
-          )
-
-          }
+          )}
         </View>
         <View>
           { this.state.item.prices.length > 0 ? 
