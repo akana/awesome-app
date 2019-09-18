@@ -8,6 +8,7 @@ branches:
 cache:
   directories:
     - node_modules
+    - coverage
 before_install:
   - npm update
 install:
