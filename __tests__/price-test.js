@@ -25,10 +25,15 @@ const onion = {
 }
 
 test('renders no error', () => {
+  //Arrange
   let wrapper = setup({
     item : onion
   });
+
+  //Act
   let priceComp = wrapper.find('[data-test="component-price"]');
+
+  //Assert
   expect(priceComp).toHaveLength(1);
 });
 
@@ -40,7 +45,9 @@ test('renders vegetable name', () => {
     }
   }
   let wrapper = setup(state);
+
   let priceComp = wrapper.find('[data-test="component-veg-name"]');
+
   expect(priceComp.dive().text()).toBe("Onion");
 });
 
@@ -48,7 +55,9 @@ test('renders vegetable name not available', () => {
   let state = {item : onion};
   delete state.item.name;
   let wrapper = setup(state);
+
   let nameComp = wrapper.find('[data-test="component-veg-name"]');
+
   expect(nameComp.dive().text()).toBe("Unknown name")
 });
 
@@ -58,6 +67,7 @@ test('renders vegetable image', () => {
   });
 
   let img = wrapper.find('[data-test="component-veg-img"]');
+
   expect(img).toBeTruthy();
 });
 
@@ -65,8 +75,8 @@ test('renders vegetable price list', () => {
   let wrapper = setup({
     item : onion
   });
+
   let priceList = wrapper.find('[data-test="component-veg-item"]');
-  expect(priceList).toHaveLength(1);
   let month = priceList.children().children('[data-test="component-veg-item-month"]');
   let price = priceList.children().children('[data-test="component-veg-item-price"]');
 
@@ -81,6 +91,8 @@ test('renders vegetable price not available', () => {
       prices : []
     }
   });
+
   let priceNotAvailable = wrapper.find('[data-test="component-veg-item-not-available"]');
+  
   expect(priceNotAvailable.dive().text()).toBe("Price is not available");
 });
