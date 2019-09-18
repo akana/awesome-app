@@ -14,4 +14,4 @@ before_install:
 install:
   - npm install
 script:
-  - npm test -- --coverage
+  - npm run coveralls
